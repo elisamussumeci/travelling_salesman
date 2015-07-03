@@ -3,11 +3,13 @@ data;
 param: city: names :=
 1 "El Calafate"
 2 "Bariloche"
-3 "Buenos Aires"
+3 "Santiago"
+4 "Buenos Aires"
 ;
 
-param DIST: 1 2 3 :=
-1 200000 1520 1313
-2 1520 200000 974
-3 1313 974 200000
+param DIST: 1 2 3 4 :=
+1 200000 1520 2720 1313
+2 1520 200000 1580 974
+3 2720 1580 200000 580
+4 1313 974 580 200000
 ;

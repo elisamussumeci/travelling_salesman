@@ -69,19 +69,21 @@ def read_output(dit):
 def get_path(dit, transp):
     cost, paths = read_output(dit)
     path = []
-    for i, path in enumerate(paths):
-        if i+1 > len(paths)-1:
+    for i, currentPath in enumerate(paths):
+        if i+1 > len(paths):
             break
 
-        transport = transp[path[0]][path[1]]
+        cityA = currentPath[0]
+        cityB = currentPath[1]
+        transport = transp[cityA][cityB]
         if transport == '0':
-            transport = transp[path[1]][path[1]]
+            transport = transp[cityB][cityA]
 
-        currentPath = {
-            "from": path[0],
-            "to": path[1],
+        pathDict = {
+            "from": cityA,
+            "to": cityB,
             "transport": transport
         }
-        path.append(currentPath)
+        path.append(pathDict)
 
     return cost, path

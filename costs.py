@@ -3,7 +3,7 @@ import numpy as np
 from data.dados import dict_of_possib
 
 index = ['Ushuaia', 'El Calafate', 'Bariloche', 'Santiago', 'Buenos Aires', 'Montevideo', 'Punta del Leste',
-         'Vina del Mar', 'Valparaiso', 'San Pedro de Atacama', 'Uyuni', 'La Paz', 'Cusco', 'Assunção']
+         'Vina del Mar', 'Valparaiso', 'San Pedro de Atacama', 'Uyuni', 'La Paz', 'Cusco', 'Assuncao']
 
 iu1 = np.triu_indices(14, 1)
 
