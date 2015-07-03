@@ -3,9 +3,14 @@
 map.featureLayer.on('ready', function(e) {
   map.featureLayer.eachLayer(function(layer) {
     var city = layer.toGeoJSON();
+
     // Tira a descrição que ele ta mandando
     city.properties.description = null;
+
+    // Preenche dicionario de cidades
     cityDict[city.properties.city] = city;
+
+    // Adiciona ao geoJSON
     geoJSON.push(city);
   });
 
@@ -15,6 +20,7 @@ map.featureLayer.on('ready', function(e) {
 map.featureLayer.on('mouseover', function(e) {
   e.layer.openPopup();
 });
+// Esconde o nome da cidade quando o mouse sai de cima
 map.featureLayer.on('mouseout', function(e) {
   e.layer.closePopup();
 });
