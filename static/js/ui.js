@@ -6,9 +6,6 @@ function resetColors() {
   map.featureLayer.setGeoJSON(geoJSON);
 }
 
-// Quando clica no mapa, tira a cor de todos os ícones
-map.on('click', resetColors);
-
 // Mostra o nome da cidade quando passa o mouse em cima
 map.featureLayer.on('mouseover', function(e) {
   e.layer.openPopup();

@@ -71,25 +71,27 @@ function drawRoute(cityArray) {
   return lines;
 }
 
+function colorCity(e) {
+  var cityProp = e.layer.feature.properties;
+
+  // Se já tiver colorido, então descolore
+  if (cityProp['marker-color'] === '#ff8888') {
+    cityProp['marker-color'] = cityProp['old-color'];
+    deselectCity(cityProp.city);
+  } else {
+    // Colore
+    cityProp['old-color'] = cityProp['marker-color'];
+    cityProp['marker-color'] = '#ff8888';
+    selectCity(cityProp.city);
+  }
+
+  map.featureLayer.setGeoJSON(geoJSON);
+}
+
 // Tudo que roda dessa função depende da variável geoJSON
 // ela so esta preenchida depois de (1)
 function init() {
 
   // Muda a cor do icone quando clica
-  map.featureLayer.on('click', function(e) {
-    var cityProp = e.layer.feature.properties;
-
-    // Se já tiver colorido, então descolore
-    if (cityProp['marker-color'] === '#ff8888') {
-      cityProp['marker-color'] = cityProp['old-color'];
-      deselectCity(cityProp.city);
-    } else {
-      // Colore
-      cityProp['old-color'] = cityProp['marker-color'];
-      cityProp['marker-color'] = '#ff8888';
-      selectCity(cityProp.city);
-    }
-
-    map.featureLayer.setGeoJSON(geoJSON);
-  });
+  map.featureLayer.on('click', colorCity);
 }
