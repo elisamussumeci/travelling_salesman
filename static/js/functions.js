@@ -1,4 +1,3 @@
-var selectedCities = [];
 
 function selectCity(cityName) {
   var cityIsIncluded = false;
@@ -88,10 +87,10 @@ function colorCity(e) {
   map.featureLayer.setGeoJSON(geoJSON);
 }
 
-// Tudo que roda dessa função depende da variável geoJSON
-// ela so esta preenchida depois de (1)
-function init() {
-
-  // Muda a cor do icone quando clica
-  map.featureLayer.on('click', colorCity);
+// Tira a cor de todos os icones
+function resetColors() {
+  for (var i = 0; i < geoJSON.length; i++) {
+    geoJSON[i].properties['marker-color'] = geoJSON[i].properties['old-color'];
+  }
+  map.featureLayer.setGeoJSON(geoJSON);
 }

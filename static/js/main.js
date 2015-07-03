@@ -10,16 +10,5 @@ map.scrollWheelZoom.disable();
 
 var geoJSON = [];
 var cityDict = {};
-
-// (1) Pega o geoJSON que vem do mapbox.com
-map.featureLayer.on('ready', function(e) {
-  map.featureLayer.eachLayer(function(layer) {
-    var city = layer.toGeoJSON();
-    // Tira a descrição que ele ta mandando
-    city.properties.description = null;
-    cityDict[city.properties.city] = city;
-    geoJSON.push(city);
-  });
-
-  init();
-});
+var selectedCities = [];
+var linesLayer = [];
