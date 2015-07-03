@@ -1,6 +1,15 @@
 
 // Pega o menor caminho quando clica no botão
 document.querySelector('#compute').onclick = function() {
+  $.ajax({
+    url: '/cities',
+    type: 'POST',
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify({cities: selectedCities})
+  }).success(function(data) {
+    console.log(data);
+  });
+
   // Desenha linhas
   linesLayer = drawRoute(selectedCities);
 
