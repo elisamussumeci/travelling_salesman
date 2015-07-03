@@ -9,6 +9,7 @@ document.querySelector('#compute').onclick = function() {
   }).success(function(data) {
     // Desenha linhas
     linesLayer = drawRoute(data.path);
+    $('#value').text(data.cost);
 
     // Desliga seleção de cidades
     map.featureLayer.off('click', colorCity);

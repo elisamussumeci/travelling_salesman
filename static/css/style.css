@@ -20,7 +20,7 @@ body { margin:0; padding:0; }
   width: 95px;
 }
 
-.menu-ui a {
+.menu-ui a, .menu-ui span {
   color: rgba(0,0,0,.75);
   border-bottom: 1px solid #ddd;
   border-bottom-color: rgba(0,0,0,.1);
@@ -37,7 +37,7 @@ body { margin:0; padding:0; }
   border-radius: 3px 3px 0 0;
 }
 
-.menu-ui a:last-child {
+.menu-ui a:last-child, .menu-ui span:last-child {
   border: none;
   border-radius: 0 0 3px 3px;
 }
@@ -47,15 +47,17 @@ body { margin:0; padding:0; }
   color: #404040;
 }
 
-.menu-ui a.active {
-  background: #3887BE;
-  color: #FFF;
-}
-
-.menu-ui a.active:hover {
-  background: #3074a4;
-}
-
 #compute {
+  font-weight: bold;
+}
+
+#cost {
+  background-color: #f8f8f8;
+  top: 100px;
+  right: 10px;
+}
+
+#cost #label {
+  display: block;
   font-weight: bold;
 }
