@@ -61,8 +61,31 @@ def read_output(dit):
             if store_next_lines:
                 values = line.split(' ')
                 if values[4] == '1\n':
-                    path.append(dit[values[0]])
-                    path.append(dit[values[1]])
+                    path.append(dit[int(values[0])])
+                    path.append(dit[int(values[1])])
 
     return cost, path
 
+
+def get_path(dit, transp):
+    cost, cities = read_output(dit)
+    cities = list(cities)
+    path = []
+    for i, city in enumerate(cities):
+        if i+1 > len(cities)-1:
+            break
+        cityA = cities[i]
+        cityB = cities[i+1]
+
+        transport = transp[cityA][cityB]
+        if transport == '0':
+            transport = transp[cityB][cityA]
+
+        currentPath = {
+            "from": cityA,
+            "to": cityB,
+            "transport": transport
+        }
+        path.append(currentPath)
+
+    return cost, path

@@ -20,14 +20,13 @@ def cities():
     data = request.get_json()
 
     df_trip, dit = calculate_path.trip_costs(data['cities'], total_costs)
-    calculate_path.create_ampl_dat(df_trip, dit)
-    print(dit)
 
+    calculate_path.create_ampl_dat(df_trip, dit)
     os.system('ampl ./ampl/a2-1.mod ./ampl/dados.dat ./ampl/final.run')
 
-    cost, path = calculate_path.read_output(dit)
+    cost, path = calculate_path.get_path(dit, transp)
 
-    return jsonify({'path': path, 'cost': cost}), 200
+    return jsonify({'cost': cost, 'path': path}), 200
 
 
 if __name__ == "__main__":

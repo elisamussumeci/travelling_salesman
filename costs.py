@@ -1,9 +1,6 @@
-__author__ = 'elisa'
-
 import pandas as pd
 import numpy as np
-
-from data.dados_test import dict_of_possib
+from data.dados import dict_of_possib
 
 index = ['Ushuaia', 'El Calafate', 'Bariloche', 'Santiago', 'Buenos Aires', 'Montevideo', 'Punta del Leste',
          'Vina del Mar', 'Valparaiso', 'San Pedro de Atacama', 'Uyuni', 'La Paz', 'Cusco', 'Assunção']
@@ -42,4 +39,3 @@ total_costs, types = create_cost_matrix(df, dict_of_possib, index)
 
 total_costs.to_csv('./data/total_costs.csv')
 types.to_csv('./data/transp.csv')
-
