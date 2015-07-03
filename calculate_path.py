@@ -65,7 +65,6 @@ def read_output(dit):
             if store_next_lines_matrix:
                 values = line.split('   ')
                 for j, value in enumerate(values[1:]):
-                    print(values)
                     if value == "1" or value == "1\n":
                         paths.append((dit[int(values[0])], dit[j+1]))
             if store_next_lines:

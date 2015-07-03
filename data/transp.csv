@@ -1,16 +1,16 @@
 ,Rio de Janeiro,Ushuaia,El Calafate,Bariloche,Santiago,Buenos Aires,Montevideo,Punta del Este,Vina del Mar,Valparaiso,San Pedro de Atacama,Uyuni,La Paz,Cusco,Assuncao
-Rio de Janeiro,0,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane
-Ushuaia,0,0,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane
-El Calafate,0,0,0,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane,plane
-Bariloche,0,0,0,0,plane,plane,plane,plane,plane,plane,plane,plane,bus,plane,plane
-Santiago,0,0,0,0,0,plane,plane,plane,plane,bus,plane,plane,plane,plane,plane
-Buenos Aires,0,0,0,0,0,0,bus,plane,plane,bus,plane,plane,plane,plane,plane
-Montevideo,0,0,0,0,0,0,0,bus,plane,plane,plane,plane,plane,plane,plane
-Punta del Este,0,0,0,0,0,0,0,0,plane,plane,bus,plane,plane,plane,bus
-Vina del Mar,0,0,0,0,0,0,0,0,0,plane,plane,plane,plane,plane,plane
-Valparaiso,0,0,0,0,0,0,0,0,0,0,plane,plane,plane,plane,plane
-San Pedro de Atacama,0,0,0,0,0,0,0,0,0,0,0,bus,bus,bus,plane
-Uyuni,0,0,0,0,0,0,0,0,0,0,0,0,plane,plane,plane
-La Paz,0,0,0,0,0,0,0,0,0,0,0,0,0,plane,plane
-Cusco,0,0,0,0,0,0,0,0,0,0,0,0,0,0,plane
+Rio de Janeiro,0,bus,bus,bus,bus,bus,bus,bus,bus,bus,bus,plane,bus,bus,bus
+Ushuaia,0,0,bus,bus,bus,bus,bus,plane,bus,bus,bus,bus,bus,bus,bus
+El Calafate,0,0,0,bus,bus,bus,bus,bus,bus,bus,bus,bus,bus,bus,bus
+Bariloche,0,0,0,0,bus,bus,bus,bus,bus,bus,bus,bus,bus,bus,bus
+Santiago,0,0,0,0,0,bus,bus,bus,bus,bus,bus,bus,bus,bus,bus
+Buenos Aires,0,0,0,0,0,0,bus,bus,bus,bus,bus,bus,bus,bus,bus
+Montevideo,0,0,0,0,0,0,0,bus,bus,bus,bus,bus,bus,bus,bus
+Punta del Este,0,0,0,0,0,0,0,0,bus,bus,bus,plane,bus,plane,bus
+Vina del Mar,0,0,0,0,0,0,0,0,0,bus,bus,bus,bus,bus,bus
+Valparaiso,0,0,0,0,0,0,0,0,0,0,bus,bus,bus,bus,bus
+San Pedro de Atacama,0,0,0,0,0,0,0,0,0,0,0,bus,bus,bus,bus
+Uyuni,0,0,0,0,0,0,0,0,0,0,0,0,bus,bus,bus
+La Paz,0,0,0,0,0,0,0,0,0,0,0,0,0,bus,bus
+Cusco,0,0,0,0,0,0,0,0,0,0,0,0,0,0,bus
 Assuncao,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
