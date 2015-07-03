@@ -19,8 +19,8 @@ transp = pd.read_csv('./data/transp.csv', index_col=[0])
 def cities():
     data = request.get_json()
 
+    print(data['cities'])
     df_trip, dit = calculate_path.trip_costs(data['cities'], total_costs)
-
     calculate_path.create_ampl_dat(df_trip, dit)
     os.system('ampl ./ampl/a2-1.mod ./ampl/dados.dat ./ampl/final.run')
 

@@ -1,14 +1,14 @@
 import pandas as pd
 import numpy as np
-from data.dados import dict_of_possib
+from data.data import dict_of_possib
 
-index = ['Ushuaia', 'El Calafate', 'Bariloche', 'Santiago', 'Buenos Aires', 'Montevideo', 'Punta del Leste',
+index = ['Rio de Janeiro', 'Ushuaia', 'El Calafate', 'Bariloche', 'Santiago', 'Buenos Aires', 'Montevideo', 'Punta del Este',
          'Vina del Mar', 'Valparaiso', 'San Pedro de Atacama', 'Uyuni', 'La Paz', 'Cusco', 'Assuncao']
 
-iu1 = np.triu_indices(14, 1)
+iu1 = np.triu_indices(15, 1)
 
-cost_index = np.zeros((14, 14))
-cost_index[iu1] = range(0,91)
+cost_index = np.zeros((15, 15))
+cost_index[iu1] = range(0,105)
 
 df = pd.DataFrame(data=cost_index, index=index, columns=index)
 
@@ -31,8 +31,8 @@ def create_cost_matrix(df, dict_of_possib, index):
             value = costs(dict_of_possib[int(key)])
             cost_column.append(value[0])
             type_column.append(value[1])
-        costs_df[i] = cost_column + [0]*(14-len(cost_column))
-        type_df[i] = type_column + [0]*(14-len(type_column))
+        costs_df[i] = cost_column + [0]*(15-len(cost_column))
+        type_df[i] = type_column + [0]*(15-len(type_column))
     return costs_df, type_df
 
 total_costs, types = create_cost_matrix(df, dict_of_possib, index)

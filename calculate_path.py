@@ -47,6 +47,7 @@ def create_ampl_dat(df_trip, dit):
 def read_output(dit):
     cost = None
     store_next_lines = False
+    store_next_lines_matrix = False
     paths = []
     with open('./ampl/output.txt', 'r') as file:
         for i, line in enumerate(file):
@@ -56,8 +57,17 @@ def read_output(dit):
             if 'x :=' in line:
                 store_next_lines = True
                 continue
+            if ': ' in line:
+                store_next_lines_matrix = True
+                continue
             if ';' in line:
                 break
+            if store_next_lines_matrix:
+                values = line.split('   ')
+                for j, value in enumerate(values[1:]):
+                    print(values)
+                    if value == "1" or value == "1\n":
+                        paths.append((dit[int(values[0])], dit[j+1]))
             if store_next_lines:
                 values = line.split(' ')
                 if values[4] == '1\n':
