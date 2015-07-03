@@ -14,6 +14,7 @@ def root():
 total_costs = pd.read_csv('./data/total_costs.csv', index_col=[0])
 transp = pd.read_csv('./data/transp.csv', index_col=[0])
 
+
 @app.route("/cities", methods=['POST'])
 def cities():
     data = request.get_json()
@@ -22,10 +23,9 @@ def cities():
     calculate_path.create_ampl_dat(df_trip, dit)
     print(dit)
     os.system('ampl ./ampl/a2-1.mod ./ampl/dados.dat ./ampl/final.run')
+    cost, path = calculate_path.read_output(dit)
 
-    f = open('./ampl/output.txt', 'r')
-
-    return jsonify({'cities': }), 200
+    return jsonify({'path': path, 'cost': cost}), 200
 
 
 if __name__ == "__main__":

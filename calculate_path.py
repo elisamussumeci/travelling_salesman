@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def consult(df, i, j):
     if i == j:
         ans = 100000
@@ -8,6 +9,7 @@ def consult(df, i, j):
     else:
         ans = df[i][j]
     return ans
+
 
 def trip_costs(index_trip, total_costs):
     shape = len(index_trip)
@@ -25,19 +27,41 @@ def trip_costs(index_trip, total_costs):
 
 
 def create_ampl_dat(df_trip, dit):
-    f = open('./ampl/dados.dat', 'w')
-    f.write('data;\n'
-            '\n'
-            'param: city: names :=\n')
+    file = open('./ampl/dados.dat', 'w')
+    file.write('data;\n'
+               '\n'
+               'param: city: names :=\n')
     for i in dit:
-        f.write(str(i)+' "'+dit[i]+'"\n')
-    f.write(';\n'
-            '\n')
+        file.write(str(i)+' "'+dit[i]+'"\n')
+    file.write(';\n'
+               '\n')
     columns = [str(n) for n in df_trip.columns]
-    f.write('param DIST: '+' '.join(columns)+' :=\n')
+    file.write('param DIST: '+' '.join(columns)+' :=\n')
     for j in df_trip:
         line = [str(int(n2)) for n2 in df_trip[:][j]]
-        f.write(str(j)+' '+ ' '.join(line)+'\n')
-    f.write(';')
-    f.close()
+        file.write(str(j) + ' ' + ' '.join(line) + '\n')
+    file.write(';')
+    file.close()
 
+
+def read_output(dit):
+    cost = None
+    store_next_lines = False
+    path = []
+    with open('./ampl/output.txt', 'r') as file:
+        for i, line in enumerate(file):
+            if i == 0:
+                cost = int(line.split('=')[1][1:])
+                continue
+            if 'x :=' in line:
+                store_next_lines = True
+                continue
+            if ';' in line:
+                break
+            if store_next_lines:
+                values = line.split(' ')
+                if values[4] == '1\n':
+                    path.append(dit[values[0]])
+                    path.append(dit[values[1]])
+
+    return cost, path
