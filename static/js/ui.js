@@ -19,11 +19,19 @@ linesLayer = [];
 document.querySelector('#compute').onclick = function() {
   linesLayer = drawRoute(selectedCities);
 
+  map.featureLayer.off('click', colorCity);
+
   return false;
 };
 
 document.querySelector('#reset').onclick = function() {
-  map.removeLayer(linesLayer);
+  linesLayer.forEach(function(layer) {
+    map.removeLayer(layer);
+  });
+
+  resetColors();
+
+  map.featureLayer.on('click', colorCity);
 
   return false;
 };
