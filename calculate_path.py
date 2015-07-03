@@ -47,7 +47,7 @@ def create_ampl_dat(df_trip, dit):
 def read_output(dit):
     cost = None
     store_next_lines = False
-    path = []
+    paths = []
     with open('./ampl/output.txt', 'r') as file:
         for i, line in enumerate(file):
             if i == 0:
@@ -61,29 +61,25 @@ def read_output(dit):
             if store_next_lines:
                 values = line.split(' ')
                 if values[4] == '1\n':
-                    path.append(dit[int(values[0])])
-                    path.append(dit[int(values[1])])
+                    paths.append((dit[int(values[0])], dit[int(values[1])]))
 
-    return cost, path
+    return cost, paths
 
 
 def get_path(dit, transp):
-    cost, cities = read_output(dit)
-    cities = list(cities)
+    cost, paths = read_output(dit)
     path = []
-    for i, city in enumerate(cities):
-        if i+1 > len(cities)-1:
+    for i, path in enumerate(paths):
+        if i+1 > len(paths)-1:
             break
-        cityA = cities[i]
-        cityB = cities[i+1]
 
-        transport = transp[cityA][cityB]
+        transport = transp[path[0]][path[1]]
         if transport == '0':
-            transport = transp[cityB][cityA]
+            transport = transp[path[1]][path[1]]
 
         currentPath = {
-            "from": cityA,
-            "to": cityB,
+            "from": path[0],
+            "to": path[1],
             "transport": transport
         }
         path.append(currentPath)
