@@ -16,3 +16,17 @@ map.featureLayer.on('mouseover', function(e) {
 map.featureLayer.on('mouseout', function(e) {
   e.layer.closePopup();
 });
+
+linesLayer = [];
+
+document.querySelector('#compute').onclick = function() {
+  linesLayer = drawRoute(selectedCities);
+
+  return false;
+};
+
+document.querySelector('#reset').onclick = function() {
+  map.removeLayer(linesLayer);
+
+  return false;
+};

@@ -1,42 +1,74 @@
 var selectedCities = [];
 
 function selectCity(cityName) {
-  // Verifica se cidade ja foi adicionada
-  for (cityIndex in selectedCities) {
-    var city = selectedCities[cityIndex];
-    if (city == cityName) {
-      return;
+  var cityIsIncluded = false;
+  selectedCities.forEach(function(city) {
+    if (city === cityName) {
+      cityIsIncluded = true;
     }
-  }
+  });
 
-  selectedCities.push(cityName);
+  if (cityIsIncluded === false) {
+    selectedCities.push(cityName);
+  }
+}
+
+function deselectCity(cityName) {
+  var newArray = [];
+
+  selectedCities.forEach(function(city) {
+    if (city !== cityName) {
+      newArray.push(city);
+    }
+  });
+
+  selectedCities = newArray;
 }
 
 function getPath(cityA, cityB) {
-  var cityACoords = cityDict[cityA].geometry.coordinates;
-  var cityBCoords = cityDict[cityB].geometry.coordinates
-  return [cityACoords, cityBCoords];
+  var coordA = cityDict[cityA].geometry.coordinates;
+  var coordB = cityDict[cityB].geometry.coordinates;
+
+  return [coordA, coordB];
 }
 
-function drawRoute(cityA, cityB) {
-  var path = getPath(cityA, cityB);
+function getFullPath(cityArray) {
+  var path = [];
 
-  var line = L.geoJson({
-      type: 'Feature',
-      geometry: {
+  for (var i=0; i<cityArray.length; i++) {
+    if (i+1 < cityArray.length) {
+      path.push(getPath(cityArray[i], cityArray[i+1]));
+    }
+  }
+
+  return path;
+}
+
+function drawLine(path) {
+  return L.geoJson({
+    type: 'Feature',
+    name: "caminho",
+    geometry: {
         type: 'LineString',
         coordinates: path
-      },
-      properties: {
-      "stroke": "#ff8888",
-      "stroke-opacity": 1,
-      "stroke-width": 4,
-      }
-    }, { style: L.mapbox.simplestyle.style }
-  );
+    },
+    properties: {
+    "stroke": "#ff8888",
+    "stroke-opacity": 1,
+    "stroke-width": 4,
+    }
+  }, { style: L.mapbox.simplestyle.style }).addTo(map);
+}
 
-  line.addTo(map);
+function drawRoute(cityArray) {
+  var lines = [];
 
+  var fullPath = getFullPath(cityArray);
+  fullPath.forEach(function(path) {
+    lines.push(drawLine(path));
+  })
+
+  return lines;
 }
 
 // Tudo que roda dessa função depende da variável geoJSON
@@ -45,16 +77,19 @@ function init() {
 
   // Muda a cor do icone quando clica
   map.featureLayer.on('click', function(e) {
+    var cityProp = e.layer.feature.properties;
+
     // Se já tiver colorido, então descolore
-    if (e.layer.feature.properties['marker-color'] === '#ff8888') {
-      e.layer.feature.properties['marker-color'] = e.layer.feature.properties['old-color'];
-      deselectCity(e.layer.feature.properties.city);
+    if (cityProp['marker-color'] === '#ff8888') {
+      cityProp['marker-color'] = cityProp['old-color'];
+      deselectCity(cityProp.city);
     } else {
       // Colore
-      e.layer.feature.properties['old-color'] = e.layer.feature.properties['marker-color'];
-      e.layer.feature.properties['marker-color'] = '#ff8888';
-      selectCity(e.layer.feature.properties.city);
+      cityProp['old-color'] = cityProp['marker-color'];
+      cityProp['marker-color'] = '#ff8888';
+      selectCity(cityProp.city);
     }
+
     map.featureLayer.setGeoJSON(geoJSON);
   });
 }
