@@ -22,7 +22,9 @@ def cities():
     df_trip, dit = calculate_path.trip_costs(data['cities'], total_costs)
     calculate_path.create_ampl_dat(df_trip, dit)
     print(dit)
+
     os.system('ampl ./ampl/a2-1.mod ./ampl/dados.dat ./ampl/final.run')
+
     cost, path = calculate_path.read_output(dit)
 
     return jsonify({'path': path, 'cost': cost}), 200

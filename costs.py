@@ -3,15 +3,15 @@ __author__ = 'elisa'
 import pandas as pd
 import numpy as np
 
-from data.data import dict_of_possib
+from data.dados_test import dict_of_possib
 
-index = ['Rio de Janeiro', 'Ushuaia', 'El Calafate', 'Bariloche', 'Santiago', 'Buenos Aires', 'Montevideo', 'Punta del Leste',
+index = ['Ushuaia', 'El Calafate', 'Bariloche', 'Santiago', 'Buenos Aires', 'Montevideo', 'Punta del Leste',
          'Vina del Mar', 'Valparaiso', 'San Pedro de Atacama', 'Uyuni', 'La Paz', 'Cusco', 'Assunção']
 
-iu1 = np.triu_indices(15, 1)
+iu1 = np.triu_indices(14, 1)
 
-cost_index = np.zeros((15, 15))
-cost_index[iu1] = range(0,105)
+cost_index = np.zeros((14, 14))
+cost_index[iu1] = range(0,91)
 
 df = pd.DataFrame(data=cost_index, index=index, columns=index)
 
@@ -42,3 +42,4 @@ total_costs, types = create_cost_matrix(df, dict_of_possib, index)
 
 total_costs.to_csv('./data/total_costs.csv')
 types.to_csv('./data/transp.csv')
+

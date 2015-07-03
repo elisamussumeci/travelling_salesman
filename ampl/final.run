@@ -6,5 +6,5 @@ option solver cplex;
 
 solve;
 
-display z > ./output.txt;
-display x >> ./output.txt;
+display z > /home/elisa/Documents/Projetos/PO2-A2/ampl/output.txt;
+display x >> /home/elisa/Documents/Projetos/PO2-A2/ampl/output.txt;

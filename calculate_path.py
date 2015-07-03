@@ -65,3 +65,4 @@ def read_output(dit):
                     path.append(dit[values[1]])
 
     return cost, path
+
