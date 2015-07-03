@@ -9,6 +9,8 @@ document.querySelector('#compute').onclick = function() {
   }).success(function(data) {
     // Desenha linhas
     linesLayer = drawRoute(data.path);
+
+    // Escreve o custo
     $('#value').text(data.cost);
 
     // Desliga seleção de cidades
@@ -24,6 +26,9 @@ document.querySelector('#reset').onclick = function() {
   linesLayer.forEach(function(layer) {
     map.removeLayer(layer);
   });
+
+  // Apaga o custo
+  $('#value').text('-');
 
   // Reinicia array de cidades selecionadas
   selectedCities = [];
