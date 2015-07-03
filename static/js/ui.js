@@ -7,14 +7,12 @@ document.querySelector('#compute').onclick = function() {
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify({cities: selectedCities})
   }).success(function(data) {
-    console.log(data);
+    // Desenha linhas
+    linesLayer = drawRoute(data.path);
+
+    // Desliga seleção de cidades
+    map.featureLayer.off('click', colorCity);
   });
-
-  // Desenha linhas
-  linesLayer = drawRoute(selectedCities);
-
-  // Desliga seleção de cidades
-  map.featureLayer.off('click', colorCity);
 
   return false;
 };

@@ -31,7 +31,7 @@ function deselectCity(cityName) {
 
 // Devolve:
 // [[<lat da cidade a>, <lng da cidade a>], [<lat da cidade b>, lng da cidade b]]
-function getPath(cityA, cityB) {
+function getLine(cityA, cityB) {
   var coordA = cityDict[cityA].geometry.coordinates;
   var coordB = cityDict[cityB].geometry.coordinates;
 
@@ -43,11 +43,10 @@ function getFullPath(cityArray) {
   var path = [];
 
   for (var i=0; i<cityArray.length; i++) {
-    // Pega o ponto entre a cidade atual e a proxima
-    // Se for a ultima nao pega
-    if (i+1 < cityArray.length) {
-      path.push(getPath(cityArray[i], cityArray[i+1]));
-    }
+    path.push({
+      line: getLine(cityArray[i].from, cityArray[i].to),
+      transport: cityArray[i].transport
+    });
   }
 
   return path;
@@ -55,15 +54,21 @@ function getFullPath(cityArray) {
 
 // Desenha a linha entre dois pontos
 function drawLine(path) {
+  var stroke;
+  if (path.transport == "plane") {
+    stroke = "#ff8888";
+  } else {
+    stroke = "#56B881";
+  }
   return L.geoJson({
     type: 'Feature',
     name: "caminho",
     geometry: {
         type: 'LineString',
-        coordinates: path
+        coordinates: path.line
     },
     properties: {
-    "stroke": "#ff8888",
+    "stroke": stroke,
     "stroke-opacity": 1,
     "stroke-width": 4,
     }
