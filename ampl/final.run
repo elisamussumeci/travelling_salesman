@@ -1,0 +1,10 @@
+reset;
+model /home/elisa/Documents/Projetos/PO2-A2/ampl/a2-1.mod;
+data /home/elisa/Documents/Projetos/PO2-A2/ampl/dados.dat;
+
+option solver cplex;
+
+solve;
+
+display z > ./output.txt;
+display x >> ./output.txt;

@@ -1,0 +1,11 @@
+reset;
+model a2-1.mod;
+data dados.dat;
+
+option solver cplex;
+
+solve;
+
+
+display z > ./output.txt;
+display x >> ./output.txt;

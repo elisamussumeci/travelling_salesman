@@ -1,0 +1,43 @@
+import pandas as pd
+
+def consult(df, i, j):
+    if i == j:
+        ans = 100000
+    elif df[i][j] == 0.0:
+        ans = df[j][i]
+    else:
+        ans = df[i][j]
+    return ans
+
+def trip_costs(index_trip, total_costs):
+    shape = len(index_trip)
+    dit = {}
+    df_index = pd.DataFrame(index=range(1, shape+1))
+    for pos, i in enumerate(index_trip):
+        l = []
+        for j in index_trip[:pos+1]:
+            cost = consult(total_costs, i, j)
+            l.append(cost)
+        df_index[pos+1] = l + [0]*(shape-len(l))
+        dit[pos+1] = i
+    df_index = df_index + df_index.T
+    return df_index, dit
+
+
+def create_ampl_dat(df_trip, dit):
+    f = open('./ampl/dados.dat', 'w')
+    f.write('data;\n'
+            '\n'
+            'param: city: names :=\n')
+    for i in dit:
+        f.write(str(i)+' "'+dit[i]+'"\n')
+    f.write(';\n'
+            '\n')
+    columns = [str(n) for n in df_trip.columns]
+    f.write('param DIST: '+' '.join(columns)+' :=\n')
+    for j in df_trip:
+        line = [str(int(n2)) for n2 in df_trip[:][j]]
+        f.write(str(j)+' '+ ' '.join(line)+'\n')
+    f.write(';')
+    f.close()
+
